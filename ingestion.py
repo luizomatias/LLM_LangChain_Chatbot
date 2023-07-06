@@ -1,19 +1,13 @@
 import os
 
 import pinecone
-from decouple import config
+from dotenv import load_dotenv, find_dotenv 
 from langchain.document_loaders import ReadTheDocsLoader
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Pinecone
 
-api_key = config("PINECONE_API_KEY")
-environment = config("PINECONE_ENVIRONMENT_REGION")
-secret_key = config("OPENAI_API_KEY")
-
-os.environ["OPENAI_API_KEY"] = secret_key
-os.environ["PINECONE_API_KEY"] = api_key
-os.environ["PINECONE_ENVIRONMENT_REGION"] = environment
+load_dotenv(find_dotenv(), override=True)
 
 pinecone.init(api_key=os.environ["PINECONE_API_KEY"],
               environment=os.environ["PINECONE_ENVIRONMENT_REGION"])
