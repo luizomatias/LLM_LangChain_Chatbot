@@ -13,7 +13,6 @@ load_dotenv(find_dotenv(), override=True)
 pinecone.init(api_key=os.environ["PINECONE_API_KEY"],
               environment=os.environ["PINECONE_ENVIRONMENT_REGION"])
 
-print(os.environ["PINECONE_API_KEY"])
 def run_llm(query: str, chat_history: List[Dict[str, Any]] = []) -> Any:
     embeddings = OpenAIEmbeddings()
     docsearch = Pinecone.from_existing_index(
